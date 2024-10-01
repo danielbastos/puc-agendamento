@@ -89,6 +89,7 @@ class AvailabilityController extends Controller
         return Inertia::render('Availability/Index', [
             'models' => $this->find(request()->query('date'), $doctor_id),
             'isDoctor' => $request->user()->hasGate('doctor'),
+            'isPatient' => $request->user()->hasGate('patient'),
             'doctors' => $this->getDoctors(),
         ]);
     }

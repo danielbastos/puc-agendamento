@@ -4,13 +4,15 @@ import { Head } from '@inertiajs/vue3'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import CrudEditButton from '@/Components/CrudEditButton.vue'
 import CrudDeleteButton from '@/Components/CrudDeleteButton.vue'
-import CrudAddButton from '@/Components/CrudAddButton.vue'
+import CrudFormButton from '@/Components/CrudFormButton.vue'
+
 import SearchDoctorAvailability from '@/Components/SearchDoctorAvailability.vue'
 
 defineProps({
     models: Array,
     doctors: Array,
     isDoctor: Boolean,
+    isPatient: Boolean,
 })
 /*
 const props = usePage().props
@@ -92,11 +94,19 @@ const addOptions = ref([
                             </td>
                             <td class="px-6 py-4">
                                 <span v-if="model.patient">
-                                    {{  model.patient.name }}
-                                    {{ model.past }}
+                                    {{ model.patient.name }}
                                 </span>
-                                <span v-if="!model.past && !model.patient">
-                                    <a :href="route('availability.schedule.index', model.id)" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+
+                                <span v-else-if="!model.past">
+                                    <CrudFormButton
+                                        v-if="isPatient"
+                                        :href="route('availability.schedule.store', model.id)"
+                                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                                        :posts="[{name: 'id', value: model.id}, {name: 'patient_id', value: $page.props.auth.user.id}]"
+                                    >
+                                        Agendar neste horário
+                                    </CrudFormButton>
+                                    <a v-else :href="route('availability.schedule.index', model.id)" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                         Agendar paciente
                                     </a>
                                 </span>
@@ -105,7 +115,7 @@ const addOptions = ref([
                                 <CrudDeleteButton v-if="!model.past && model.patient" :href="route('availability.schedule.cancel', model.id)" title="Cancelar" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                     Cancelar
                                 </CrudDeleteButton>
-                                <CrudDeleteButton v-if="!model.past && !model.patient" :href="route('availability.delete', model.id)" title="Remover" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                <CrudDeleteButton v-if="!isPatient && !model.past && !model.patient" :href="route('availability.delete', model.id)" title="Remover" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                                     Remover
                                 </CrudDeleteButton>
                             </td>

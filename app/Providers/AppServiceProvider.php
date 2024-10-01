@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('patient', function (User $user, $permName) {
-            $allow = ['menu:scheduling.index'];
+            $allow = ['menu:scheduling.index', 'menu:availability.index'];
             return in_array($permName, $allow);
         });
 
