@@ -124,6 +124,5 @@ const addOptions = ref([
                 </table>
             </div>
         </div>
-        <pre style="height: 300px; overflow: scroll;">{{ models }}</pre>
     </AuthenticatedLayout>
 </template>
