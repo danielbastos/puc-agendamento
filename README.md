@@ -11,7 +11,26 @@ Projeto de análise de um sistema de agendamento, focado em atendimentos médico
 
 A função deste é implementar os pontos principai da especificação. A documentação aqui é específica da implementação. 
 
+Com o intuito de facilitar o deploy, a aplicação esta dockerizada e utiliza as ferramentas disponíveis no Laravel para o mesmo. 
+
+## Requisitos ...
+- [Docker](https://www.docker.com/)
+- [Docker compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
+
 ## Executando ...
+
+Clonando o repositório:
+``git clone git@github.com:danielbastos/puc-agendamento.git``
+
+Instalado as dependências necessárias:
+``docker run --rm --interactive --tty --volume $PWD:/app composer install``
+
+Copiando arquivo de configuração:
+``cp .env.example .env``
+
+Executando o projeto:
+``sail up -d``
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
