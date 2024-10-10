@@ -34,7 +34,7 @@ onMounted(() => {
     /* width: 70px; */
     /* padding: 0 !important; */
 ">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('availability.index')">
                                     <ApplicationLogo
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />

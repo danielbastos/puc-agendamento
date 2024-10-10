@@ -25,21 +25,22 @@ class AppServiceProvider extends ServiceProvider
         Vite::prefetch(concurrency: 3);
 
         Gate::define('admin', function (User $user, $permName) {
-            return true;
+            $allow = ['menu:scheduling.index', 'menu:availability.index'];
+            return in_array($permName, $allow);
         });
 
         Gate::define('attendant', function (User $user, $permName) {
-            $allow = ['menu:scheduling.index'];
+            $allow = ['menu:scheduling.index', 'menu:availability.index'];
             return in_array($permName, $allow);
         });
 
         Gate::define('patient', function (User $user, $permName) {
-            $allow = ['menu:scheduling.index', 'menu:availability.index'];
+            $allow = ['menu:dashboard', 'menu:scheduling.index', 'menu:availability.index'];
             return in_array($permName, $allow);
         });
 
         Gate::define('doctor', function (User $user, $permName) {
-            $allow = ['menu:scheduling.index', 'menu:availability.index'];
+            $allow = ['menu:dashboard', 'menu:scheduling.index', 'menu:availability.index'];
             return in_array($permName, $allow);
         });
 

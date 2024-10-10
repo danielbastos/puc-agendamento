@@ -17,11 +17,8 @@ class HandleInertiaRequests extends Middleware
     protected $rootView = 'app';
 
     private function menuPerms($user) {
-        $res[] = [
-            'key' => 'dashboard',
-            'title' => 'Dashboard',
-            'activeKey' => 'dashboard',
-        ];
+        $res = [];
+        if (Gate::check('user_gate', 'menu:dashboard')) $res[] =  [ 'key' => 'dashboard', 'title' => 'Dashboard', 'activeKey' => 'dashboard'];
         if (Gate::check('user_gate', 'menu:user.index')) $res[] = ['key' => 'user.index', 'title' => 'Usuários', 'activeKey' => 'user.*'];
         if (Gate::check('user_gate', 'menu:availability.index')) $res[] = ['key' => 'availability.index', 'title' => 'Disponibilidade', 'activeKey' => 'availability.*'];
         //if (Gate::allows($user, 'scheduling.index')) $res['menu:scheduling.index'] = ['title' => 'Agendamento', 'activeKey' => 'scheduling.*'];
