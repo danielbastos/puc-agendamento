@@ -49,8 +49,8 @@ const addOptions = ref([
                         <SearchDoctorAvailability :doctors="doctors" :isDoctor="isDoctor"/>
                     </div>
                     
-                    <div class="flex-1 pt-4  text-right">
-                        <a :href="route('availability.create')" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Adicionar</a>
+                    <div v-if="!isPatient" class="flex-1 pt-4  text-right">
+                        <a :href="route('availability.create')" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Adicionar horários</a>
                     </div>
                 </div>
                 
@@ -94,7 +94,8 @@ const addOptions = ref([
                             </td>
                             <td class="px-6 py-4">
                                 <span v-if="model.patient">
-                                    {{ model.patient.name }}
+                                    <span v-if="isPatient">Horário ocupado</span>
+                                    <span v-if="!isPatient">{{ model.patient.name }}</span>
                                 </span>
 
                                 <span v-else-if="!model.past">

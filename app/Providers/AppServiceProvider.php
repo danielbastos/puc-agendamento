@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         Vite::prefetch(concurrency: 3);
 
         Gate::define('admin', function (User $user, $permName) {
-            $allow = ['menu:scheduling.index', 'menu:availability.index'];
+            $allow = ['menu:scheduling.index', 'menu:availability.index', 'menu:user.index'];
             return in_array($permName, $allow);
         });
 
