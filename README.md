@@ -63,4 +63,5 @@ Para facilitar, existe um gerador de dados fake onde vai criar usuários, médic
 ## Executando
 
 Aplicação: ``http://127.0.0.1:1080``
-Servidor fake de e-mails: ``http://localhost:18025/``
+
+Servidor fake de e-mails: ``http://127.0.0.1:18025/``
