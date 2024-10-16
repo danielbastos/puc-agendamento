@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/availability/create', [AvailabilityController::class, 'create'])->name('availability.create');
     Route::post('/availability/create', [AvailabilityController::class, 'store'])->name('availability.store');
     //Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    
     Route::get('/availability/edit/{id}', [AvailabilityController::class, 'edit'])->name('availability.edit');
     Route::post('/availability/edit/{id}', [AvailabilityController::class, 'update'])->name('availability.update');
     Route::delete('/availability/{id}', [AvailabilityController::class, 'destroy'])->name('availability.delete');
