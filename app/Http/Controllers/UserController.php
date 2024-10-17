@@ -88,7 +88,7 @@ class UserController extends Controller
         }
         $model->save();
 
-        \App\Models\UserRole::factory()->create([
+        \App\Models\UserRole::create([
             'user_id' => $model->id,
             'role_id' => \App\Models\Role::where('gate_name', $role)->first()->id,
         ]);
