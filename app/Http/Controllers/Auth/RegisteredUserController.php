@@ -42,14 +42,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        \App\Models\UserRole::factory()->create([
+        \App\Models\UserRole::create([
             'user_id' => $user->id,
             'role_id' => \App\Models\Role::where('gate_name', 'patient')->first()->id,
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        //Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
     }
